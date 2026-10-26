@@ -1,0 +1,27 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-leave-types
+      author: parlog
+      changes:
+        - createTable:
+            tableName: leave_types
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: days_per_year
+                  type: INTEGER
+                  constraints:
+                    nullable: false

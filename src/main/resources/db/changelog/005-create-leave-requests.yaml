@@ -1,0 +1,61 @@
+
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-leave-requests
+      author: parlog
+      changes:
+        - createTable:
+            tableName: leave_requests
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: employee_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: leave_type_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: reason
+                  type: VARCHAR(255)
+              - column:
+                  name: status
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: VARCHAR(255)
+
+        - addForeignKeyConstraint:
+            baseTableName: leave_requests
+            baseColumnNames: employee_id
+            referencedTableName: employees
+            referencedColumnNames: id
+            constraintName: fk_leave_request_employee
+
+        - addForeignKeyConstraint:
+            baseTableName: leave_requests
+            baseColumnNames: leave_type_id
+            referencedTableName: leave_types
+            referencedColumnNames: id
+            constraintName: fk_leave_request_type
